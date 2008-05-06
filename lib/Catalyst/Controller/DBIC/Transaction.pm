@@ -4,7 +4,7 @@
     use warnings;
     use base 'Catalyst::Controller';
 
-    our $VERSION = '0.1';
+    our $VERSION = '0.2';
 
     __PACKAGE__->mk_accessors qw(_dbic_transaction_schemas);
 
@@ -12,7 +12,7 @@
         my ($self, $c, $name, $value) = @_;
 
         $self->_dbic_transaction_schemas({}) unless
-          $self->_dbic_transaction_schemas({});
+          $self->_dbic_transaction_schemas();
 
         $self->_dbic_transaction_schemas->{$name} = $value;
 

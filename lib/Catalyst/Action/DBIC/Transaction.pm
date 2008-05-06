@@ -8,8 +8,9 @@
     sub execute {
         my $self = shift;
         my ( $controller, $c ) = @_;
+        my @other_args = @_;
 
-        my $schema_class = $controller->_dbic_transaction_schemas->{$self->name}
+        my $model_class = $controller->_dbic_transaction_schemas->{$self->name}
           or die 'No schema class defined for DBIC::Transaction ActionClass';
 
         my $wantarray = wantarray;
@@ -17,13 +18,13 @@
 
         my $sub = subname 'Catalyst::Action::DBIC::Transaction::execute' => sub {
             if ($wantarray) {
-                @return = $self->next::method($self,@_);
+                @return = $self->next::method(@other_args);
             } else {
-                $return = $self->next::method($self,@_);
+                $return = $self->next::method(@other_args);
             }
         };
 
-        $schema_class->txn_do($sub);
+        $c->model($model_class)->schema->txn_do($sub);
 
         if ($wantarray) {
             return @return;
@@ -42,7 +43,7 @@ Catalyst::Action::DBIC::Transaction - Encloses actions into transactions
 =head1 SYNOPSIS
 
   use base qw(Catalyst::Controller::DBIC::Transaction);
-  sub foo :DBICTransaction('DB::Schema') {
+  sub foo :DBICTransaction('DB') {
      do $something or die $!;
   }
 
@@ -50,7 +51,7 @@ Catalyst::Action::DBIC::Transaction - Encloses actions into transactions
 
 This module enables the use of automatic transaction support into
 Catalyst Actions, it will associate a given action with the
-appropriate action class and save the DBIx::Class::Schema class name
+appropriate action class and save the DBIC::Schema model class name
 for later use.
 
 The action will be executed inside a txn_do, and a die inside that

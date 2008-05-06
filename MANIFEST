@@ -6,5 +6,6 @@ MANIFEST
 README
 t/01_basic.t
 t/lib/TestApp/Controller/Foo.pm
+t/lib/TestApp/Model/DB.pm
 t/lib/TestApp.pm
 META.yml                                 Module meta-data (added by MakeMaker)

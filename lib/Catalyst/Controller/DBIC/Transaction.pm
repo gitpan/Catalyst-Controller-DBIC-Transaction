@@ -4,7 +4,7 @@
     use warnings;
     use base 'Catalyst::Controller';
 
-    our $VERSION = '0.2';
+    our $VERSION = '0.3';
 
     __PACKAGE__->mk_accessors qw(_dbic_transaction_schemas);
 
@@ -29,7 +29,7 @@ Catalyst::Controller::DBIC::Transaction - Encloses actions into transactions
 =head1 SYNOPSIS
 
   use base qw(Catalyst::Controller::DBIC::Transaction);
-  sub foo :DBICTransaction('DB::Schema') {
+  sub foo :DBICTransaction('DB') {
      do $something or die $!;
   }
 
@@ -37,7 +37,7 @@ Catalyst::Controller::DBIC::Transaction - Encloses actions into transactions
 
 This module enables the use of automatic transaction support into
 Catalyst Actions, it will associate a given action with the
-appropriate action class and save the DBIx::Class::Schema class name
+appropriate action class and save the DBIC::Schema model class name
 for later use.
 
 The action will be executed inside a txn_do, and a die inside that

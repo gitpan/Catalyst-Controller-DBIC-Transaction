@@ -1,0 +1,13 @@
+# http://module-build.sourceforge.net/META-spec.html
+#XXXXXXX This is a prototype!!!  It will change in the future!!! XXXXX#
+name:         Catalyst-Controller-DBIC-Transaction
+version:      0.1
+version_from: lib/Catalyst/Controller/DBIC/Transaction.pm
+installdirs:  site
+requires:
+    Catalyst::Runtime:             5.7011
+    Class::C3:                     0
+    Sub::Name:                     0
+
+distribution_type: module
+generated_by: ExtUtils::MakeMaker version 6.30_01

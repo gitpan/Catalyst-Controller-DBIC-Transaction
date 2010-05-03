@@ -4,7 +4,7 @@
     use warnings;
     use base 'Catalyst::Controller';
 
-    our $VERSION = '0.3';
+    our $VERSION = '0.4';
 
     __PACKAGE__->mk_accessors qw(_dbic_transaction_schemas);
 
@@ -34,6 +34,11 @@ Catalyst::Controller::DBIC::Transaction - Encloses actions into transactions
   }
 
 =head1 DESCRIPTION
+
+THIS MODULE SHOULD BE CONSIDERED DEPRECATED. What is currently
+understood as a better practice is to enclose the code requiring a
+transaction into a proper model class. The point is that business
+logic should not be in the controller.
 
 This module enables the use of automatic transaction support into
 Catalyst Actions, it will associate a given action with the
